@@ -46,7 +46,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated background */
         body::before {
             content: '';
             position: fixed;
@@ -68,17 +67,6 @@
             z-index: 1;
         }
 
-        /* Glass morphism effect */
-        .glass-card {
-            background: rgba(17, 24, 39, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 2rem;
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Header Section */
         .header {
             display: flex;
             flex-wrap: wrap;
@@ -105,6 +93,41 @@
             background: var(--gradient-1);
         }
 
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .profile-pic-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            padding: 3px;
+            animation: pulse 2s infinite;
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 3px solid var(--bg-primary);
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .name-section h1 {
             font-size: 3rem;
             font-weight: 800;
@@ -113,7 +136,6 @@
             background: var(--gradient-1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            position: relative;
         }
 
         .typing-container {
@@ -148,6 +170,7 @@
             padding: 1.2rem 2rem;
             border-radius: 3rem;
             border: 1px solid var(--border-color);
+            margin-left: auto;
         }
 
         .contact-item {
@@ -172,7 +195,6 @@
             font-size: 1.1rem;
         }
 
-        /* Stats / Badges */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -220,7 +242,6 @@
             font-size: 0.9rem;
         }
 
-        /* Objective Section */
         .objective-card {
             background: var(--bg-secondary);
             padding: 2rem;
@@ -275,7 +296,6 @@
             transform-origin: left;
         }
 
-        /* Main Grid Layout */
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
@@ -289,7 +309,6 @@
             }
         }
 
-        /* Section Titles */
         .section-title {
             display: flex;
             align-items: center;
@@ -312,7 +331,6 @@
             border-radius: 2px;
         }
 
-        /* Experience Timeline */
         .timeline {
             position: relative;
         }
@@ -375,7 +393,6 @@
             font-size: 0.95rem;
         }
 
-        /* Skills Grid */
         .skills-container {
             display: flex;
             flex-direction: column;
@@ -433,7 +450,6 @@
             font-size: 0.8rem;
         }
 
-        /* Projects Grid */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -513,7 +529,6 @@
             border: 1px solid var(--border-color);
         }
 
-        /* Certifications */
         .certs-grid {
             display: flex;
             flex-wrap: wrap;
@@ -536,7 +551,6 @@
             transform: translateX(5px);
         }
 
-        /* Platform Cards */
         .platforms {
             display: flex;
             gap: 1rem;
@@ -577,7 +591,6 @@
             color: var(--text-muted);
         }
 
-        /* Footer */
         .footer {
             margin-top: 3rem;
             padding: 2rem;
@@ -632,13 +645,11 @@
             transform: translateY(-3px);
         }
 
-        /* Terminal effect */
         .terminal-text {
             font-family: 'Fira Code', monospace;
             color: var(--accent-primary);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .header {
                 flex-direction: column;
@@ -653,9 +664,19 @@
                 flex-direction: column;
                 text-align: center;
             }
+
+            .profile-section {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .contact-info {
+                margin-left: 0;
+                width: 100%;
+                justify-content: center;
+            }
         }
 
-        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -667,6 +688,18 @@
             }
         }
 
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 255, 157, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 255, 157, 0);
+            }
+        }
+
         .animate {
             animation: fadeInUp 0.6s ease forwards;
         }
@@ -674,13 +707,21 @@
 </head>
 <body>    
     <div class="container">
-        <!-- Header with direct links -->
         <header class="header animate">
-            <div class="name-section">
-                <h1>Srag Mohamed Zantout</h1>
-                <div class="typing-container">
-                    <span class="terminal-text">$</span>
-                    <span class="typing-text" id="typing"></span>
+            <div class="profile-section">
+                <div class="profile-pic-container">
+                    <div class="profile-pic">
+                        <!-- الصورة هتظهر تلقائي لأنك رفعتها باسم profile.jpg -->
+                        <img src="profile.jpg" alt="Srag Mohamed">
+                    </div>
+                </div>
+
+                <div class="name-section">
+                    <h1>Srag Mohamed Zantout</h1>
+                    <div class="typing-container">
+                        <span class="terminal-text">$</span>
+                        <span class="typing-text" id="typing"></span>
+                    </div>
                 </div>
             </div>
             
@@ -705,11 +746,13 @@
                     <i class="fab fa-github"></i>
                     GitHub
                 </a>
-               
+                <a href="https://srag-zantout.github.io" target="_blank" rel="noopener noreferrer" class="contact-item">
+                    <i class="fas fa-globe"></i>
+                    srag-zantout.github.io
+                </a>
             </div>
         </header>
 
-        <!-- Stats Section -->
         <div class="stats-grid">
             <div class="stat-card animate">
                 <div class="stat-icon">
@@ -749,7 +792,6 @@
             </div>
         </div>
 
-        <!-- Objective Card -->
         <div class="objective-card animate">
             <div class="objective-text">
                 <span class="highlight">Dedicated Cyber Security student</span> at Tanta University with a strong focus on 
@@ -759,11 +801,8 @@
             </div>
         </div>
 
-        <!-- Main Grid Content -->
         <div class="main-grid">
-            <!-- Left Column -->
             <div class="left-col">
-                <!-- Experience Section -->
                 <div class="section-title animate">
                     <i class="fas fa-briefcase"></i>
                     <span></span>
@@ -796,7 +835,6 @@
                     </div>
                 </div>
 
-                <!-- Education -->
                 <div class="section-title animate" style="margin-top: 2rem;">
                     <i class="fas fa-graduation-cap"></i>
                     <span></span>
@@ -812,7 +850,6 @@
                     <p style="color: var(--accent-primary); font-weight: 600;">Oct 2022 - Expected 2026</p>
                 </div>
 
-                <!-- Certifications -->
                 <div class="section-title animate" style="margin-top: 2rem;">
                     <i class="fas fa-certificate"></i>
                     <span></span>
@@ -828,9 +865,7 @@
                 </div>
             </div>
 
-            <!-- Right Column -->
             <div class="right-col">
-                <!-- Technical Skills -->
                 <div class="section-title animate">
                     <i class="fas fa-code"></i>
                     <span></span>
@@ -890,7 +925,6 @@
                     </div>
                 </div>
 
-                <!-- Soft Skills -->
                 <div class="skill-category animate" style="margin-top: 1.5rem;">
                     <div class="skill-header">
                         <i class="fas fa-heart"></i>
@@ -906,7 +940,6 @@
                     </div>
                 </div>
 
-                <!-- Platforms -->
                 <div class="platforms">
                     <div class="platform-card animate">
                         <i class="fas fa-flag platform-icon"></i>
@@ -926,7 +959,6 @@
             </div>
         </div>
 
-        <!-- Projects Section -->
         <div class="section-title animate" style="margin-top: 2rem;">
             <i class="fas fa-project-diagram"></i>
             <span></span>
@@ -979,7 +1011,6 @@
             </div>
         </div>
 
-        <!-- Footer with direct links -->
         <footer class="footer animate">
             <div class="languages">
                 <span class="language-item">
@@ -1002,7 +1033,6 @@
     </div>
 
     <script>
-        // Typing effect
         const phrases = [
             'Penetration Tester',
             'Security Instructor',
@@ -1039,10 +1069,8 @@
             }
         }
         
-        // Start typing effect
         setTimeout(typeEffect, 1000);
         
-        // Animate on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1060,4 +1088,9 @@
         document.querySelectorAll('.animate').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
