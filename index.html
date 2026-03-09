@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srag Mohamed Zantout | Penetration Tester & Security Instructor</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0c14;
+            --bg-secondary: #111827;
+            --bg-tertiary: #1a2332;
+            --accent-primary: #00ff9d;
+            --accent-secondary: #0066ff;
+            --text-primary: #f0f4fa;
+            --text-secondary: #b0c0d0;
+            --text-muted: #7e8a9e;
+            --border-color: #2a3442;
+            --success: #00ff9d;
+            --warning: #ffb86b;
+            --danger: #ff5e5e;
+            --gradient-1: linear-gradient(135deg, #00ff9d, #0066ff);
+            --gradient-2: linear-gradient(45deg, #1a2332, #0f1622);
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 20px rgba(0, 255, 157, 0.2);
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 157, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 102, 255, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Matrix-like rain effect (subtle) */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.02;
+            font-family: 'Fira Code', monospace;
+            color: var(--accent-primary);
+            font-size: 14px;
+            line-height: 1;
+            white-space: nowrap;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Glass morphism effect */
+        .glass-card {
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+
+        .name-section h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .typing-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .typing-text {
+            color: var(--accent-primary);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .typing-text::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: var(--bg-tertiary);
+            padding: 1.2rem 2rem;
+            border-radius: 3rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.3rem 0.8rem;
+            border-radius: 2rem;
+        }
+
+        .contact-item:hover {
+            color: var(--accent-primary);
+            background: rgba(0, 255, 157, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .contact-item i {
+            color: var(--accent-primary);
+            font-size: 1.1rem;
+        }
+
+        /* Stats / Badges */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-primary);
+            box-shadow: var(--glow);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--bg-primary);
+        }
+
+        .stat-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .stat-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Objective Section */
+        .objective-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 2rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .objective-card::after {
+            content: '>';
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            font-size: 8rem;
+            font-family: 'Fira Code', monospace;
+            color: rgba(0, 255, 157, 0.05);
+            font-weight: 800;
+        }
+
+        .objective-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 80%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight {
+            color: var(--accent-primary);
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+
+        .highlight::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .highlight:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Main Grid Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 968px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Section Titles */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .section-title i {
+            color: var(--accent-primary);
+            font-size: 1.8rem;
+        }
+
+        .section-title span {
+            background: var(--gradient-1);
+            width: 4px;
+            height: 2rem;
+            border-radius: 2px;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+        }
+
+        .timeline-item {
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--gradient-1);
+            opacity: 0.3;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -4px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--accent-primary);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 2rem;
+            color: var(--accent-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-subtitle {
+            color: var(--accent-primary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Skills Grid */
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .skill-header i {
+            font-size: 1.3rem;
+        }
+
+        .skill-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-badge {
+            padding: 0.5rem 1.2rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-badge:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--glow);
+        }
+
+        .skill-badge i {
+            margin-right: 0.5rem;
+            color: var(--accent-primary);
+            font-size: 0.8rem;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-primary);
+        }
+
+        .project-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .project-icon {
+            font-size: 2rem;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-tag {
+            padding: 0.2rem 0.8rem;
+            background: var(--bg-tertiary);
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Certifications */
+        .certs-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .cert-badge {
+            padding: 0.5rem 1.2rem;
+            background: var(--bg-tertiary);
+            border-left: 3px solid var(--accent-primary);
+            border-radius: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .cert-badge:hover {
+            background: var(--bg-secondary);
+            transform: translateX(5px);
+        }
+
+        /* Platform Cards */
+        .platforms {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .platform-card {
+            flex: 1;
+            min-width: 150px;
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .platform-card:hover {
+            border-color: var(--accent-primary);
+            transform: scale(1.05);
+        }
+
+        .platform-icon {
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+        }
+
+        .platform-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .platform-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 2rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .languages {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .language-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .language-item i {
+            color: var(--accent-primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-tertiary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .social-link:hover {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            transform: translateY(-3px);
+        }
+
+        /* Terminal effect */
+        .terminal-text {
+            font-family: 'Fira Code', monospace;
+            color: var(--accent-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .objective-text {
+                max-width: 100%;
+            }
+            
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg" id="matrix"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="header animate">
+            <div class="name-section">
+                <h1>Srag Mohamed Zantout</h1>
+                <div class="typing-container">
+                    <span class="terminal-text">$</span>
+                    <span class="typing-text" id="typing"></span>
+                </div>
+            </div>
+            
+            <div class="contact-info">
+                <a href="mailto:srag.zantot2005@gmail.com" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    srag.zantot2005
+                </a>
+                <a href="tel:+201554323733" class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    +20 155 432 3733
+                </a>
+                <span class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Cairo, Egypt
+                </span>
+                <a href="#" class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    LinkedIn
+                </a>
+                <a href="#" class="contact-item">
+                    <i class="fab fa-github"></i>
+                    GitHub
+                </a>
+            </div>
+        </header>
+
+        <!-- Stats Section -->
+        <div class="stats-grid">
+            <div class="stat-card animate">
+                <div class="stat-icon">
+                    <i class="fas fa-shield-halved"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>3+ Years</h3>
+                    <p>Security Experience</p>
+                </div>
+            </div>
+            <div class="stat-card animate">
+                <div class="stat-icon">
+                    <i class="fas fa-flag"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>50+</h3>
+                    <p>CTF Challenges</p>
+                </div>
+            </div>
+            <div class="stat-card animate">
+                <div class="stat-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Top 10%</h3>
+                    <p>TryHackMe</p>
+                </div>
+            </div>
+            <div class="stat-card animate">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>100+</h3>
+                    <p>Students Trained</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Objective Card -->
+        <div class="objective-card animate">
+            <div class="objective-text">
+                <span class="highlight">Dedicated Cyber Security student</span> at Tanta University with a strong focus on 
+                <span class="highlight">Network & Web Penetration Testing</span>. Experienced instructor with a history of 
+                simplifying complex technical concepts and fostering interactive learning environments. Proven track record 
+                in creating engaging <span class="highlight">CTF challenges</span> and comprehensive security courses.
+            </div>
+        </div>
+
+        <!-- Main Grid Content -->
+        <div class="main-grid">
+            <!-- Left Column -->
+            <div class="left-col">
+                <!-- Experience Section -->
+                <div class="section-title animate">
+                    <i class="fas fa-briefcase"></i>
+                    <span></span>
+                    <h2>Experience</h2>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item animate">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-date">Nov 2024 - Present</span>
+                        <h3 class="timeline-title">Cyber Security Instructor</h3>
+                        <div class="timeline-subtitle">SPIDERS</div>
+                        <p class="timeline-desc">Delivering hands-on training in web & network penetration testing, guiding students through real-world attack scenarios and defense mechanisms.</p>
+                    </div>
+
+                    <div class="timeline-item animate">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-date">Mar 2023 - Jul 2023</span>
+                        <h3 class="timeline-title">Cyber Security Instructor</h3>
+                        <div class="timeline-subtitle">FCI Society Tanta</div>
+                        <p class="timeline-desc">Introduced OWASP Top 10, basic exploitation techniques, and defensive strategies to university students.</p>
+                    </div>
+
+                    <div class="timeline-item animate">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-date">Jan 2023 - Present</span>
+                        <h3 class="timeline-title">Jr. Penetration Tester</h3>
+                        <div class="timeline-subtitle">Spiders</div>
+                        <p class="timeline-desc">Active participation in penetration testing engagements, CTF development, and security tool research.</p>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="section-title animate" style="margin-top: 2rem;">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span></span>
+                    <h2>Education</h2>
+                </div>
+
+                <div class="skill-category animate">
+                    <div class="skill-header">
+                        <i class="fas fa-university"></i>
+                        <span>B.Sc. Computer Science & IT</span>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">Faculty of Computer and Information, Tanta University</p>
+                    <p style="color: var(--accent-primary); font-weight: 600;">Oct 2022 - Expected 2026</p>
+                </div>
+
+                <!-- Certifications -->
+                <div class="section-title animate" style="margin-top: 2rem;">
+                    <i class="fas fa-certificate"></i>
+                    <span></span>
+                    <h2>Certifications</h2>
+                </div>
+
+                <div class="certs-grid">
+                    <span class="cert-badge">Introduction to Network Security</span>
+                    <span class="cert-badge">Ethical Hacking</span>
+                    <span class="cert-badge">OWASP Top 10 2021</span>
+                    <span class="cert-badge">Computer Network Fundamentals</span>
+                    <span class="cert-badge">Network Implementation</span>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-col">
+                <!-- Technical Skills -->
+                <div class="section-title animate">
+                    <i class="fas fa-code"></i>
+                    <span></span>
+                    <h2>Technical Skills</h2>
+                </div>
+
+                <div class="skills-container">
+                    <div class="skill-category animate">
+                        <div class="skill-header">
+                            <i class="fas fa-terminal"></i>
+                            <span>Programming Languages & OS</span>
+                        </div>
+                        <div class="skill-badges">
+                            <span class="skill-badge"><i class="fab fa-python"></i>Python</span>
+                            <span class="skill-badge"><i class="fas fa-code"></i>Bash</span>
+                            <span class="skill-badge"><i class="fab fa-php"></i>PHP</span>
+                            <span class="skill-badge"><i class="fas fa-code"></i>C++</span>
+                            <span class="skill-badge"><i class="fas fa-code"></i>C#</span>
+                            <span class="skill-badge"><i class="fab fa-java"></i>Java</span>
+                            <span class="skill-badge"><i class="fab fa-linux"></i>Linux</span>
+                            <span class="skill-badge"><i class="fab fa-windows"></i>Windows</span>
+                            <span class="skill-badge"><i class="fas fa-server"></i>Windows Server</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category animate">
+                        <div class="skill-header">
+                            <i class="fas fa-bug"></i>
+                            <span>Security Tools & Expertise</span>
+                        </div>
+                        <div class="skill-badges">
+                            <span class="skill-badge">Burp Suite</span>
+                            <span class="skill-badge">OWASP Top 10</span>
+                            <span class="skill-badge">Nmap</span>
+                            <span class="skill-badge">Metasploit</span>
+                            <span class="skill-badge">SQLmap</span>
+                            <span class="skill-badge">Wayback</span>
+                            <span class="skill-badge">Wireshark</span>
+                            <span class="skill-badge">Active Directory</span>
+                            <span class="skill-badge">Exploitation</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category animate">
+                        <div class="skill-header">
+                            <i class="fas fa-network-wired"></i>
+                            <span>Network & Infrastructure</span>
+                        </div>
+                        <div class="skill-badges">
+                            <span class="skill-badge">TCP/IP</span>
+                            <span class="skill-badge">LAN/WAN</span>
+                            <span class="skill-badge">VPN</span>
+                            <span class="skill-badge">Git</span>
+                            <span class="skill-badge">Wireshark</span>
+                            <span class="skill-badge">CTF Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div class="skill-category animate" style="margin-top: 1.5rem;">
+                    <div class="skill-header">
+                        <i class="fas fa-heart"></i>
+                        <span>Soft Skills</span>
+                    </div>
+                    <div class="skill-badges">
+                        <span class="skill-badge">Self-Motivation</span>
+                        <span class="skill-badge">Discipline</span>
+                        <span class="skill-badge">Adaptability</span>
+                        <span class="skill-badge">Communication</span>
+                        <span class="skill-badge">Team Collaboration</span>
+                        <span class="skill-badge">Consistency</span>
+                    </div>
+                </div>
+
+                <!-- Platforms -->
+                <div class="platforms">
+                    <div class="platform-card animate">
+                        <i class="fas fa-flag platform-icon"></i>
+                        <div class="platform-info">
+                            <h4>TryHackMe</h4>
+                            <p>Top 10% Global</p>
+                        </div>
+                    </div>
+                    <div class="platform-card animate">
+                        <i class="fas fa-cube platform-icon"></i>
+                        <div class="platform-info">
+                            <h4>HackTheBox</h4>
+                            <p>Active Player</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="section-title animate" style="margin-top: 2rem;">
+            <i class="fas fa-project-diagram"></i>
+            <span></span>
+            <h2>Projects</h2>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card animate">
+                <i class="fas fa-flag project-icon"></i>
+                <h3 class="project-title">CTF Challenges Platform</h3>
+                <p class="project-desc">Hands-on challenges to test and apply security skills in real-world scenarios.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Web Security</span>
+                    <span class="project-tag">Exploitation</span>
+                    <span class="project-tag">CTF</span>
+                </div>
+            </div>
+
+            <div class="project-card animate">
+                <i class="fas fa-lock project-icon"></i>
+                <h3 class="project-title">Lock-up-app</h3>
+                <p class="project-desc">App lock screen that captures photos & encrypts data on wrong password attempts.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Android</span>
+                    <span class="project-tag">Encryption</span>
+                    <span class="project-tag">Security</span>
+                </div>
+            </div>
+
+            <div class="project-card animate">
+                <i class="fas fa-train project-icon"></i>
+                <h3 class="project-title">Railway Station Monitor</h3>
+                <p class="project-desc">Network traffic monitoring using encryption and Wireshark analysis.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Network</span>
+                    <span class="project-tag">Wireshark</span>
+                    <span class="project-tag">Encryption</span>
+                </div>
+            </div>
+
+            <div class="project-card animate">
+                <i class="fas fa-comment-dots project-icon"></i>
+                <h3 class="project-title">Small Chat-GPT</h3>
+                <p class="project-desc">Secure chat application with data encryption and cloud integration.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Cloud</span>
+                    <span class="project-tag">Encryption</span>
+                    <span class="project-tag">API</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer animate">
+            <div class="languages">
+                <span class="language-item">
+                    <i class="fas fa-language"></i>
+                    العربية (Native)
+                </span>
+                <span class="language-item">
+                    <i class="fas fa-language"></i>
+                    English (Professional)
+                </span>
+            </div>
+            
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Typing effect
+        const phrases = [
+            'Penetration Tester',
+            'Security Instructor',
+            'CTF Creator',
+            'Ethical Hacker',
+            'Network Security Specialist'
+        ];
+        
+        let currentPhrase = 0;
+        let currentChar = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById('typing');
+        
+        function typeEffect() {
+            const currentText = phrases[currentPhrase];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, currentChar - 1);
+                currentChar--;
+            } else {
+                typingElement.textContent = currentText.substring(0, currentChar + 1);
+                currentChar++;
+            }
+            
+            if (!isDeleting && currentChar === currentText.length) {
+                isDeleting = true;
+                setTimeout(typeEffect, 2000);
+            } else if (isDeleting && currentChar === 0) {
+                isDeleting = false;
+                currentPhrase = (currentPhrase + 1) % phrases.length;
+                setTimeout(typeEffect, 500);
+            } else {
+                setTimeout(typeEffect, isDeleting ? 50 : 100);
+            }
+        }
+        
+        // Start typing effect
+        setTimeout(typeEffect, 1000);
+        
+        // Matrix rain effect (simplified)
+        function createMatrix() {
+            const matrix = document.getElementById('matrix');
+            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレワヲン';
+            const columns = Math.floor(window.innerWidth / 20);
+            
+            for (let i = 0; i < columns; i++) {
+                const span = document.createElement('span');
+                span.style.position = 'absolute';
+                span.style.left = i * 20 + 'px';
+                span.style.top = Math.random() * 100 + '%';
+                span.style.color = '#00ff9d';
+                span.style.opacity = Math.random() * 0.5;
+                span.textContent = chars[Math.floor(Math.random() * chars.length)];
+                matrix.appendChild(span);
+                
+                setInterval(() => {
+                    span.style.top = (parseInt(span.style.top) + 20) % window.innerHeight + 'px';
+                    span.textContent = chars[Math.floor(Math.random() * chars.length)];
+                }, Math.random() * 100 + 50);
+            }
+        }
+        
+        // Uncomment to enable matrix rain (can be heavy)
+        // createMatrix();
+        
+        // Animate on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.animate').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
