@@ -61,23 +61,6 @@
             z-index: -1;
         }
 
-        /* Matrix-like rain effect (subtle) */
-        .matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0.02;
-            font-family: 'Fira Code', monospace;
-            color: var(--accent-primary);
-            font-size: 14px;
-            line-height: 1;
-            white-space: nowrap;
-            z-index: -1;
-        }
-
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -689,11 +672,9 @@
         }
     </style>
 </head>
-<body>
-    <div class="matrix-bg" id="matrix"></div>
-    
+<body>    
     <div class="container">
-        <!-- Header -->
+        <!-- Header with direct links -->
         <header class="header animate">
             <div class="name-section">
                 <h1>Srag Mohamed Zantout</h1>
@@ -716,13 +697,18 @@
                     <i class="fas fa-map-marker-alt"></i>
                     Cairo, Egypt
                 </span>
-                <a href="#" class="contact-item">
+                <a href="https://linkedin.com/in/srag-zantout-0894b1306" target="_blank" rel="noopener noreferrer" class="contact-item">
                     <i class="fab fa-linkedin"></i>
                     LinkedIn
                 </a>
-                <a href="#" class="contact-item">
+                <a href="https://github.com/Srag-zantout" target="_blank" rel="noopener noreferrer" class="contact-item">
                     <i class="fab fa-github"></i>
                     GitHub
+                </a>
+                <!-- Direct link to your website - opens in new tab -->
+                <a href="https://srag-zantout.github.io" target="_blank" rel="noopener noreferrer" class="contact-item">
+                    <i class="fas fa-globe"></i>
+                    srag-zantout.github.io
                 </a>
             </div>
         </header>
@@ -997,7 +983,7 @@
             </div>
         </div>
 
-        <!-- Footer -->
+        <!-- Footer with direct links -->
         <footer class="footer animate">
             <div class="languages">
                 <span class="language-item">
@@ -1011,9 +997,9 @@
             </div>
             
             <div class="social-links">
-                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://github.com/Srag-zantout" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/srag-zantout-0894b1306" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://srag-zantout.github.io" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fas fa-globe"></i></a>
                 <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
             </div>
         </footer>
@@ -1060,32 +1046,6 @@
         // Start typing effect
         setTimeout(typeEffect, 1000);
         
-        // Matrix rain effect (simplified)
-        function createMatrix() {
-            const matrix = document.getElementById('matrix');
-            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレワヲン';
-            const columns = Math.floor(window.innerWidth / 20);
-            
-            for (let i = 0; i < columns; i++) {
-                const span = document.createElement('span');
-                span.style.position = 'absolute';
-                span.style.left = i * 20 + 'px';
-                span.style.top = Math.random() * 100 + '%';
-                span.style.color = '#00ff9d';
-                span.style.opacity = Math.random() * 0.5;
-                span.textContent = chars[Math.floor(Math.random() * chars.length)];
-                matrix.appendChild(span);
-                
-                setInterval(() => {
-                    span.style.top = (parseInt(span.style.top) + 20) % window.innerHeight + 'px';
-                    span.textContent = chars[Math.floor(Math.random() * chars.length)];
-                }, Math.random() * 100 + 50);
-            }
-        }
-        
-        // Uncomment to enable matrix rain (can be heavy)
-        // createMatrix();
-        
         // Animate on scroll
         const observerOptions = {
             threshold: 0.1,
@@ -1104,9 +1064,4 @@
         document.querySelectorAll('.animate').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-    </script>
-</body>
-</html>
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s
